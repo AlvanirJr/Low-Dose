@@ -18,7 +18,7 @@ import re, os
 import numpy as np
 import pandas as pd
 from math import floor
-import scipy.misc
+import skimage.io as io
 import random
 
 
@@ -56,7 +56,7 @@ def data_mean_value(csv, dir):
     values = np.zeros((r,3))
     idx = 0
     for i, row in data.iterrows():
-        img = scipy.misc.imread(dir+row[0], mode="RGB")
+        img = io.imread(dir+row[0], pilmode="RGB")
         values[idx,:] = np.mean(img, axis=(0,1))
         idx += 1
 

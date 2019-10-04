@@ -1,8 +1,11 @@
 import os
 from DataInterface import DataInterface
 from ConeBeamCT import ConeBeamCT
-from scipy import misc
-
+import skimage.io as io
+import sklearn.preprocessing as normalize
+import skimage
+import numpy
+import scipy.misc as misc
 
 nr_projections = 15
 
@@ -24,13 +27,17 @@ try:
         vol = data.get_tomo_volume(x)
         ct = ConeBeamCT(vol)
         rec = ct.run_new_scan(nr_projections)
-
+        maxim = rec.max()
         _, _, z = rec.shape
 
         for slice in range(z):
             im = rec[:,:,slice]
-            misc.imsave(os.path.join(new_dest, "Tomo_{}_slice_{}.png".format(str(x).zfill(3),str(slice).zfill(3))), im)
-
+            # print(im[150])
+            # im = (normalize.normalize(im))
+            # im *= 255 / maxim
+            # print(skimage.img_as_ubyte(im)* m)
+            # io.imsave(os.path.join(new_dest, "Tomo_{}_slice_{}.png".format(str(x).zfill(3),str(slice).zfill(3))), skimage.img_as_ubyte(im)* maxim)
+            misc.imsave(os.path.join(new_dest, "Tomo_{}_slice_{}.png".format(str(x).zfill(3),str(slice).zfill(3))), (im))
         print(100*t/len(scans))
         t = t + 1
 

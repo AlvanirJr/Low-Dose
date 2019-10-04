@@ -3,8 +3,6 @@ import time
 import os
 from torch.autograd import Variable
 import skimage.io as io
-import scipy.misc
-import scipy
 from data_loader import Tomographic_Dataset
 from torch.utils.data import Dataset, DataLoader
 from data_utils import data_mean_value
@@ -14,6 +12,8 @@ from matplotlib import pyplot as plt
 from torchvision import utils
 #from skimage.morphology import disk
 #from skimage.filters.rank import median
+import scipy.misc as misc
+
 
 n_class         = 2
 net             = 'VGG-UNET'
@@ -28,7 +28,7 @@ model_src = "./models/{}-model-{}-projs".format(net, projs)
 
 def evaluate_img():
 
-    test_data = Tomographic_Dataset(csv_file="test.csv", phase='val', flip_rate=0, train_csv="training.csv",
+    test_data = Tomographic_Dataset(csv_file="validation.csv", phase='val', flip_rate=0, train_csv="test.csv",
                                     input_dir=input_dir, target_dir=target_dir)
     test_loader = DataLoader(test_data, batch_size=1, num_workers=1)
 
@@ -62,7 +62,7 @@ def evaluate_img():
         output = output.data.cpu().numpy()
 
         N, _, h, w = output.shape
-        y = output.transpose(0, 2, 3, 1).reshape(0, n_class).argmax(axis=1).reshape(N, h, w)
+        y = output.transpose(0, 2, 3, 1).reshape(-1, n_class).argmax(axis=1).reshape(N, h, w)
         target = batch['l'].cpu().numpy().reshape(N, h, w)
 
         img_batch = batch['X']
@@ -77,10 +77,10 @@ def evaluate_img():
 
         original = io.imread(batch['o'][0], pilmode='RGB')
 
-        io.imsave(dest+'/target.png', target[0,:,:])
-        io.imsave(dest+'/final_rec.png', final_rec)
-        io.imsave(dest+'/input.png', x)
-        io.imsave(dest+'/original.png', original)
+        misc.imsave(dest+'/target.png', target[0,:,:])
+        misc.imsave(dest+'/final_rec.png', final_rec)
+        misc.imsave(dest+'/input.png', x)
+        misc.imsave(dest+'/original.png', original)
 
 
 

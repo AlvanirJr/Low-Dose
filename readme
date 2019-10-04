@@ -6,7 +6,7 @@ Execute the following:
 
 1. run segmentation_test.py to obtain the dataset segmented (ground truth)
 2. run create-low-dose-data.py to obtain Low Dose CBCT reconstructions of dataset
-3. run training-validation-test.py to create disjoint groups of Tomos for training, validate, and executing the Neural Net
+3. run training-validation-test.py to create disjoint groups of Tomos for training, validate, and execut ing the Neural Net
 
 
 

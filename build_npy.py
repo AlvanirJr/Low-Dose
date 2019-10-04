@@ -16,7 +16,7 @@
 
 import os
 import numpy as np
-from scipy import misc
+import skimage.io as io
 import matplotlib.pyplot as plt
 
 """
@@ -45,7 +45,7 @@ for file in os.listdir(segmented_dir):
 
         if file.endswith(files_ext):
 
-            output_img = misc.imread(os.path.join(segmented_dir,file), mode='F')
+            output_img = io.imread(os.path.join(segmented_dir,file), pilmode='F')
 
             #esse .npy aqui tem que ter 0 e 1 para cada uma das classes. Necessário checar ser esta assim.
 

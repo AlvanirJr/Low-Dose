@@ -5,7 +5,7 @@ from math import floor
 import numpy as np
 
 src = "/home/andrei/Área de Trabalho/Pesquisa/DATASET-256/"
-prop = [.8, .1, .1]
+prop = [.7, .1, .2]
 
 data = DataInterface(src)
 

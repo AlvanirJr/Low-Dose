@@ -14,7 +14,7 @@
 
 import pandas as pd
 import numpy as np
-import scipy.misc
+import skimage.io as io
 import random
 import os
 
@@ -62,7 +62,7 @@ class Tomographic_Dataset(Dataset):
 
     def __getitem__(self, idx):
         img_name   = self.data.ix[idx, 0]
-        img        = scipy.misc.imread(self.input_dir+img_name, mode='RGB')
+        img        = io.imread(self.input_dir+img_name, pilmode='RGB')
         label_name = self.data.ix[idx, 1]
         label      = np.load(self.target_dir+label_name)
 
