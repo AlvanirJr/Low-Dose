@@ -4,7 +4,7 @@ import random
 from math import floor
 import numpy as np
 
-src = "/home/andrei/Área de Trabalho/Pesquisa/DATASET-256/"
+src = "/home/andrei/low-dose/DATASET-256 LOW-DOSE/15_projections/"
 prop = [.7, .1, .2]
 
 data = DataInterface(src)

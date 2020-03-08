@@ -32,8 +32,8 @@ debug:              flag to allow intermediate visualization
 """
 
 
-segmented_dir = '/home/andrei/Área de Trabalho/Pesquisa/DATASET-256-GT/'
-target_dir = "/home/andrei/Área de Trabalho/Pesquisa/DATASET-256 LOW-DOSE/15_projections-target/"
+segmented_dir = '/home/andrei/low-dose/DATASET-GT/'
+target_dir = "/home/andrei/low-dose/DATASET-256 LOW-DOSE/15_projections-target/"
 files_ext = '.png'
 
 debug = False

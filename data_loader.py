@@ -32,7 +32,7 @@ train_dim:      dimensions (h,w) of the cropped files used in the training stage
 note: please see the comment above the attribute self.data when the phase is 'train' in the constructor of Tomographic_Dataset
 """
 
-original_src = "/home/andrei/Área de Trabalho/Pesquisa/DATASET-256/"
+original_src = "/home/andrei/low-dose/DATASET-REGULARIZED/"
 train_dim   = (128,128)
 
 
@@ -61,9 +61,9 @@ class Tomographic_Dataset(Dataset):
         return len(self.data)
 
     def __getitem__(self, idx):
-        img_name   = self.data.ix[idx, 0]
+        img_name   = self.data.iloc[idx, 0]
         img        = io.imread(self.input_dir+img_name, pilmode='RGB')
-        label_name = self.data.ix[idx, 1]
+        label_name = self.data.iloc[idx, 1]
         label      = np.load(self.target_dir+label_name)
 
 

@@ -30,7 +30,7 @@ src_img:            directory containing the set of low quality or high quality 
 """
 
 
-src_img = "/home/andrei/Área de Trabalho/Pesquisa/DATASET-256 LOW-DOSE/15_projections/"
+src_img = "/home/andrei/low-dose/DATASET-256 LOW-DOSE/15_projections/"
 
 
 

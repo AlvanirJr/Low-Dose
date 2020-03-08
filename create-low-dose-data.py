@@ -4,13 +4,14 @@ from ConeBeamCT import ConeBeamCT
 import skimage.io as io
 import sklearn.preprocessing as normalize
 import skimage
-import numpy
+import numpy as np
 import scipy.misc as misc
-
+import imageio
+import sklearn.preprocessing as pp
 nr_projections = 15
 
-src = "/home/andrei/Área de Trabalho/Pesquisa/DATASET-256/"
-dest = "/home/andrei/Área de Trabalho/Pesquisa/DATASET-256 LOW-DOSE/"
+src = "/home/andrei/low-dose/DATASET-REGULARIZED/"
+dest = "/home/andrei/low-dose/DATASET-256 LOW-DOSE/"
 
 
 
@@ -37,7 +38,13 @@ try:
             # im *= 255 / maxim
             # print(skimage.img_as_ubyte(im)* m)
             # io.imsave(os.path.join(new_dest, "Tomo_{}_slice_{}.png".format(str(x).zfill(3),str(slice).zfill(3))), skimage.img_as_ubyte(im)* maxim)
-            misc.imsave(os.path.join(new_dest, "Tomo_{}_slice_{}.png".format(str(x).zfill(3),str(slice).zfill(3))), (im))
+            # im = np.round((im + 1) * 255 / 2)
+            # im = im.astype(np.uin)
+            transform = pp.QuantileTransformer(random_state=0)
+            # a = transform.fit_transform()
+            # im = transform.transform(im)
+            # print(im.max())
+            imageio.imwrite(os.path.join(new_dest, "Tomo_{}_slice_{}.png".format(str(x).zfill(3),str(slice+1).zfill(3))), (im))
         print(100*t/len(scans))
         t = t + 1
 
