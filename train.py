@@ -31,7 +31,7 @@ momentum   = 0.5
 w_decay    = 0 #antes 1e-5
 
 #after each 'step_size' epochs, the 'lr' is reduced by 'gama'
-lr         = 0.0001 # antes le-4
+lr         = 0.00001 # antes le-4
 step_size  = 10
 gamma      = 0.5
 filename = "checkpoint.pth.tar"
@@ -89,7 +89,7 @@ else:
 print("GPU Available: ",use_gpu, " number: ",len(num_gpu))
 
 train_data = Tomographic_Dataset(csv_file=train_file, phase='train', train_csv=train_file, input_dir=input_dir, target_dir=target_dir)
-train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=12, pin_memory=True)
+train_loader = DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=4, pin_memory=True)
 
 #directory of training files is passed to obtain the mean value of the images in the trained set which is not trained in the CNN
 val_data = Tomographic_Dataset(csv_file=val_file, phase='val', flip_rate=0, train_csv=train_file, input_dir=input_dir, target_dir=target_dir)
@@ -108,7 +108,7 @@ if use_gpu:
     print("Finish cuda loading, time elapsed {}".format(time.time() - ts))
 
 
-criterion = nn.BCEWithLogitsLoss()
+criterion = nn.MSELoss()
 optimizer = optim.RMSprop(fcn_model.parameters(), lr=lr, momentum=momentum, weight_decay=w_decay)
 scheduler = lr_scheduler.StepLR(optimizer, step_size=step_size, gamma=gamma)
 

@@ -18,8 +18,8 @@ import scipy.misc as misc
 n_class         = 2
 net             = 'VGG-UNET'
 projs           = 15
-input_dir       = "/home/andrei/Área de Trabalho/Pesquisa/DATASET-256 LOW-DOSE/{}_projections/".format(projs)
-target_dir      = "/home/andrei/Área de Trabalho/Pesquisa/DATASET-256 LOW-DOSE/{}_projections-target/".format(projs)
+input_dir       = "/home/andrei/low-dose/DATASET-256 LOW-DOSE/{}_projections/".format(projs)
+target_dir      = "/home/andrei/low-dose/DATASET-256 LOW-DOSE/{}_projections-target/".format(projs)
 means           = data_mean_value("training.csv", input_dir) / 255.
 
 model_src = "./models/{}-model-{}-projs".format(net, projs)
@@ -77,10 +77,10 @@ def evaluate_img():
 
         original = io.imread(batch['o'][0], pilmode='RGB')
 
-        misc.imsave(dest+'/target.png', target[0,:,:])
-        misc.imsave(dest+'/final_rec.png', final_rec)
-        misc.imsave(dest+'/input.png', x)
-        misc.imsave(dest+'/original.png', original)
+        io.imsave(dest+'/target.png', target[0,:,:])
+        io.imsave(dest+'/final_rec.png', final_rec)
+        io.imsave(dest+'/input.png', x)
+        io.imsave(dest+'/original.png', original)
 
 
 
